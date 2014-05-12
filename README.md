@@ -15,6 +15,7 @@ Temperature logger and plotter implemented with Play! framework and Akka
 
 
 # install/setup
+First, edit utils.Sensors class to fit with your sensors (require bash skills).
 
 
 Refer to <a href="http://www.playframework.com/documentation/2.0/Production">Play documentation</a> for deploy/run.
