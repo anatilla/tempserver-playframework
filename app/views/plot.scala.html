@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ThermServer - Plot - hooverdam</title>
+	   	<meta name="description" content="Plot of temperature from sensor connected to Hoover Dam">
+		<meta name="author" content="Alessandro Natilla">
+		<meta name="version" content="0.1">
+		<script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
+		<script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
+
+		<script type="text/javascript">
+		
+		var chart; // global chart variable
+
+		// Get data from Pi NodeJS server
+
+		function getData(){
+			$.getJSON('./temperature_now', function(data) {
+				
+				var shift0 = chart.series[0].data.length > 20;
+				var shift1 = chart.series[1].data.length > 20;
+				var shift2 = chart.series[2].data.length > 20;
+
+				// Add the point
+				chart.series[0].addPoint([data.temperature_record[0].unix_time, parseFloat(data.temperature_record[0].external)], true, shift0);
+				chart.series[1].addPoint([data.temperature_record[0].unix_time, parseFloat(data.temperature_record[0].mobo)], true, shift1);
+				chart.series[2].addPoint([data.temperature_record[0].unix_time, parseFloat(data.temperature_record[0].core)], true, shift2);
+
+				// Repeat this function call after 1 second
+				setTimeout(getData, 1000);
+				});
+			}
+	
+	   // Configure the plot
+	$(document).ready(function() {
+	   chart = new Highcharts.Chart({
+		chart: {
+		    renderTo: 'container',
+		    defaultSeriesType: 'spline',
+		    events: {
+		        load: getData
+		    }
+		},
+		title: {
+		    text: 'Temperature Plot'
+		},
+		xAxis: {
+		    type: 'datetime',
+		    tickPixelInterval: 150,
+		    maxZoom: 20 * 1000,
+		    title: {
+			   text: 'Time (sensor called at one second intervals)',
+			   margin: 15
+			}
+		},
+		yAxis: {
+		    minPadding: 0.2,
+		    maxPadding: 0.2,
+		    title: {
+		        text: 'Temperature \u00B0C',
+		        margin: 15
+		    }
+		},
+		series: [{
+		    name: 'External Temperature sensor',
+		    data: []
+			},{
+		    name: 'Mobo Temperature Sensor',
+		    data: []
+			},{
+		    name: 'Core Temperature Sensor',
+		    data: []
+		    }]
+	    });        
+	});
+	</script>			
+	</head>
+
+	<body>
+	<div id="container" style="width: 100%; height: 400px"></div>
+	
+	</body>
+</html>

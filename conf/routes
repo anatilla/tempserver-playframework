@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /temperature_now            controllers.Application.getActualTemp()
+GET     /temperature_query          controllers.Application.getLogTemp(num: Int, date: String)
+GET     /plot                       controllers.Application.renderActualPlot()
+GET     /log                        controllers.Application.renderLogPlot()
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
