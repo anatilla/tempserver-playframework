@@ -27,7 +27,7 @@ For a rapid test of the application, get in tempserver-playframework's directory
 
 Then browse <a href="http://localhost:9000/log">http://localhost:9000/log</a> for real time plot.
 
-For history plot browse <a href="+ http://localhost:9000/plot">http://localhost:9000/plot</a>
+For history plot browse <a href="http://localhost:9000/plot">http://localhost:9000/plot</a>
 
 
 
