@@ -12,11 +12,7 @@ public class CollectorActor extends UntypedActor {
     @Override
     public void onReceive(Object message) throws Exception {
         String msg = (String) message;
-        if (msg.equalsIgnoreCase("collect")) {
-            MeasureService.persistMeasurement();
-
-        } else {
-            unhandled(message);
-        }
+        if (msg.equalsIgnoreCase("collect")) MeasureService.persistMeasurement();
+        else unhandled(message);
     }
 }

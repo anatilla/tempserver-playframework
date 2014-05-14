@@ -1,3 +1,5 @@
+app/utils/Sensors.java
+conf/application.conf
 logs
 project/project
 project/target

@@ -19,17 +19,17 @@ public class Sensors {
         String[] cmd1 = {
                 "/bin/sh",
                 "-c",
-                "sensors -u | grep temp2_input: | cut -d':' -f2"
+                "sensors | grep 'Core 0' | cut -d'+' -f2 | cut -d'C' -f1"
         };
         String[] cmd2 = {
                 "/bin/sh",
                 "-c",
-                "sudo read-temp | grep Temperature | cut -d':' -f2 | cut -d ' ' -f2 | cut -d 'C' -f1 | cut -d '\' -f1"
+                "sensors | grep temp1 | cut -d'+' -f2 | cut -d' ' -f1"
         };
         String[] cmd3 = {
                 "/bin/sh",
                 "-c",
-                "sensors -u | grep temp1_input: | cut -d':' -f2"
+                "sensors | grep 'Core 1' | cut -d'+' -f2 | cut -d'C' -f1"
         };
 
         cmds.put(MeasurementType.CORE, cmd1);
